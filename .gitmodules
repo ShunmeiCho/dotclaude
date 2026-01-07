@@ -1,0 +1,18 @@
+[submodule "claude-d3js-skill"]
+	path = claude-d3js-skill
+	url = https://github.com/chrisvoncsefalvay/claude-d3js-skill.git
+[submodule "family-history-planning"]
+	path = family-history-planning
+	url = https://github.com/emaynard/claude-family-history-research-skill.git
+[submodule "move-code-quality"]
+	path = move-code-quality
+	url = https://github.com/1NickPappas/move-code-quality-skill
+[submodule "n8n-skills"]
+	path = n8n-skills
+	url = https://github.com/haunchen/n8n-skills.git
+[submodule "notebooklm-skill"]
+	path = notebooklm-skill
+	url = https://github.com/PleasePrompto/notebooklm-skill.git
+[submodule "pict-test-designer"]
+	path = pict-test-designer
+	url = https://github.com/omkamal/pypict-claude-skill.git

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+
+# Node.js
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive data
+data/
+*.env
+.env.*
+browser_state/
+state.json
+
+# Logs
+*.log
