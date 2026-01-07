@@ -37,6 +37,25 @@ init_submodules() {
     log_success "Submodules initialized"
 }
 
+# Install global Python dependencies for local skills
+install_python_deps() {
+    log_info "Installing global Python dependencies..."
+
+    local deps="lxml pymupdf pypdf reportlab pillow openpyxl"
+
+    if pip install $deps -q 2>/dev/null; then
+        log_success "Python dependencies installed"
+    else
+        # Try pip3 if pip fails
+        if pip3 install $deps -q 2>/dev/null; then
+            log_success "Python dependencies installed (via pip3)"
+        else
+            log_warn "Failed to install some Python dependencies"
+            log_info "Try manually: pip install $deps"
+        fi
+    fi
+}
+
 # Setup Python skill with venv
 setup_python_skill() {
     local skill_dir="$1"
@@ -138,6 +157,7 @@ main() {
         --python)
             if [ "$has_python" = true ]; then
                 log_info "Setting up Python skills..."
+                install_python_deps
                 setup_python_skill "$SCRIPT_DIR/notebooklm-skill"
             else
                 log_error "Python not found, skipping Python skills"
@@ -155,6 +175,7 @@ main() {
         --all|*)
             if [ "$has_python" = true ]; then
                 log_info "Setting up Python skills..."
+                install_python_deps
                 setup_python_skill "$SCRIPT_DIR/notebooklm-skill"
                 echo ""
             fi

@@ -20,6 +20,16 @@ cd ~/.claude/skills
 ./setup.sh
 ```
 
+### Setup Options
+
+```bash
+./setup.sh              # Install all dependencies (Python + Node.js)
+./setup.sh --all        # Same as above
+./setup.sh --python     # Python dependencies only
+./setup.sh --node       # Node.js dependencies only
+./setup.sh --minimal    # Submodules only, no dependencies
+```
+
 ### Manual Setup
 
 If you prefer manual installation:
@@ -27,7 +37,10 @@ If you prefer manual installation:
 ```bash
 cd ~/.claude/skills
 
-# Python skills (notebooklm-skill)
+# 1. Global Python dependencies (for local skills)
+pip install lxml pymupdf pypdf reportlab pillow openpyxl
+
+# 2. NotebookLM skill (with venv)
 cd notebooklm-skill
 python3 -m venv .venv
 source .venv/bin/activate
@@ -36,7 +49,7 @@ patchright install chrome
 deactivate
 cd ..
 
-# Node.js skills
+# 3. Node.js skills
 cd playwright-skill && npm install && npx playwright install chromium && cd ..
 cd n8n-skills && npm install && npm run build && cd ..
 ```
@@ -68,13 +81,21 @@ These skills are prompt-only and work out of the box:
 
 ### Local Skills (With Dependencies)
 
-| Skill | Dependencies | Setup |
-|-------|--------------|-------|
-| `docx` | Python (lxml) | `pip install lxml` |
-| `pdf` | Python (PyMuPDF, reportlab) | `pip install pymupdf reportlab pillow` |
-| `pptx` | Python + Node.js | See skill directory |
-| `xlsx` | Python (openpyxl) | `pip install openpyxl` |
-| `playwright-skill` | Node.js | `npm install && npx playwright install chromium` |
+| Skill | Runtime | Dependencies | Setup Command |
+|-------|---------|--------------|---------------|
+| `docx` | Python | lxml | `pip install lxml` |
+| `pdf` | Python | pypdf, pymupdf, reportlab, pillow | `pip install pypdf pymupdf reportlab pillow` |
+| `pptx` | Python + Node.js | lxml, html2pptx | See skill directory |
+| `xlsx` | Python | openpyxl | `pip install openpyxl` |
+| `playwright-skill` | Node.js 18+ | playwright | `npm install && npx playwright install chromium` |
+| `n8n-skills` | Node.js 18+ | n8n, typescript | `npm install && npm run build` |
+| `notebooklm-skill` | Python 3.10+ | patchright | Uses venv, see setup.sh |
+
+**Quick install all Python dependencies:**
+
+```bash
+pip install lxml pymupdf pypdf reportlab pillow openpyxl
+```
 
 ### Third-Party Skills (Submodules)
 
