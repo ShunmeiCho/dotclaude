@@ -23,6 +23,7 @@ Thumbs.db
 data/
 *.env
 .env.*
+!.env.example
 browser_state/
 state.json
 

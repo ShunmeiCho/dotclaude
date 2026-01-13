@@ -12,6 +12,9 @@ cd ~/dotclaude
 # Install configuration (interactive)
 ./install.sh
 
+# Configure MCP servers
+./setup-mcp.sh
+
 # Install skill dependencies (optional)
 ./setup.sh
 ```
@@ -22,9 +25,10 @@ cd ~/dotclaude
 dotclaude/
 ├── install.sh           # Deploy configs to ~/.claude/
 ├── setup.sh             # Install skill dependencies
+├── setup-mcp.sh         # Configure MCP servers via CLI
+├── .env.example         # API key template
 ├── CLAUDE.md            # User instructions (thinking protocol, RIPER-5)
 ├── settings.json        # Claude Code settings (plugins, etc.)
-├── mcp.json             # MCP server configuration
 ├── skills/              # 41 Skills
 │   ├── ccxt/            # Cryptocurrency trading
 │   ├── claude-code-guide/
@@ -116,15 +120,34 @@ Contains:
 }
 ```
 
-### mcp.json
-```json
-{
-  "mcpServers": {
-    "notion": {
-      "url": "https://mcp.notion.com/mcp"
-    }
-  }
-}
+### MCP Servers (setup-mcp.sh)
+
+MCP servers are configured using the official `claude mcp add` command:
+
+```bash
+./setup-mcp.sh
+```
+
+**Core servers (no API key required):**
+| Server | Type | Description |
+|--------|------|-------------|
+| Notion | HTTP | Notion workspace integration |
+| GitHub | HTTP | GitHub repository operations |
+| Playwright | Stdio | Browser automation |
+| Chrome DevTools | Stdio | Browser debugging |
+
+**Optional servers (require API keys):**
+| Server | Environment Variable | Description |
+|--------|---------------------|-------------|
+| Context7 | `CONTEXT7_API_KEY` | Library documentation search |
+| Perplexity | `PERPLEXITY_API_KEY` | AI-powered search |
+
+To add optional servers:
+```bash
+cp .env.example .env
+# Edit .env with your API keys
+source .env
+./setup-mcp.sh
 ```
 
 ## Updating

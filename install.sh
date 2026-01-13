@@ -117,17 +117,6 @@ install_config() {
         echo "  ✓ settings.json"
     fi
 
-    # mcp.json
-    if [ -f "$SCRIPT_DIR/mcp.json" ]; then
-        if [ "$mode" = "link" ]; then
-            [ -f "$CLAUDE_DIR/mcp.json" ] && mv "$CLAUDE_DIR/mcp.json" "$CLAUDE_DIR/mcp.json.bak"
-            ln -sf "$SCRIPT_DIR/mcp.json" "$CLAUDE_DIR/mcp.json"
-        else
-            cp "$SCRIPT_DIR/mcp.json" "$CLAUDE_DIR/"
-        fi
-        echo "  ✓ mcp.json"
-    fi
-
     log_success "Config files installed"
 }
 
@@ -274,10 +263,12 @@ main() {
     echo "Installed:"
     echo "  - Skills: $(ls "$CLAUDE_DIR/skills" 2>/dev/null | wc -l) skills"
     [ "$skills_only" = false ] && echo "  - Resources: ~/.claude/resources/"
-    [ "$skills_only" = false ] && echo "  - Config: settings.json, mcp.json"
+    [ "$skills_only" = false ] && echo "  - Config: settings.json"
     [ "$skills_only" = false ] && echo "  - CLAUDE.md"
     echo ""
-    echo "Run ./setup.sh to install skill dependencies (Python/Node.js)"
+    echo "Next steps:"
+    echo "  ./setup-mcp.sh   - Configure MCP servers (Notion, GitHub, etc.)"
+    echo "  ./setup.sh       - Install skill dependencies (Python/Node.js)"
     echo ""
 }
 
