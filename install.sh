@@ -86,22 +86,6 @@ install_skills_copy() {
     log_success "Skills installed (copied)"
 }
 
-install_resources() {
-    local mode=$1
-    log_info "Installing resources..."
-
-    if [ "$mode" = "link" ]; then
-        if [ -L "$CLAUDE_DIR/resources" ]; then
-            rm "$CLAUDE_DIR/resources"
-        fi
-        ln -s "$SCRIPT_DIR/resources" "$CLAUDE_DIR/resources"
-    else
-        cp -r "$SCRIPT_DIR/resources" "$CLAUDE_DIR/"
-    fi
-
-    log_success "Resources installed"
-}
-
 install_config() {
     local mode=$1
     log_info "Installing config files..."
@@ -243,10 +227,6 @@ main() {
     echo ""
 
     if [ "$skills_only" = false ]; then
-        # Install resources
-        install_resources "$mode"
-        echo ""
-
         # Install config files
         install_config "$mode"
         echo ""
@@ -262,7 +242,6 @@ main() {
     echo ""
     echo "Installed:"
     echo "  - Skills: $(ls "$CLAUDE_DIR/skills" 2>/dev/null | wc -l) skills"
-    [ "$skills_only" = false ] && echo "  - Resources: ~/.claude/resources/"
     [ "$skills_only" = false ] && echo "  - Config: settings.json"
     [ "$skills_only" = false ] && echo "  - CLAUDE.md"
     echo ""

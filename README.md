@@ -29,15 +29,12 @@ dotclaude/
 ├── .env.example         # API key template
 ├── CLAUDE.md            # User instructions (thinking protocol, RIPER-5)
 ├── settings.json        # Claude Code settings (plugins, etc.)
-├── skills/              # 41 Skills
-│   ├── ccxt/            # Cryptocurrency trading
-│   ├── claude-code-guide/
-│   ├── postgresql/
-│   ├── playwright-skill/
-│   └── ...
-└── resources/           # Reference materials
-    ├── documents/       # Methodology, tutorials
-    └── prompts/         # System prompts, templates
+└── skills/              # 41 Skills
+    ├── ccxt/            # Cryptocurrency trading
+    ├── claude-code-guide/
+    ├── postgresql/
+    ├── playwright-skill/
+    └── ...
 ```
 
 ## Installation Options
@@ -160,14 +157,6 @@ git pull
 # If using copy mode, re-run install
 ./install.sh --copy
 ```
-
-## Resources
-
-The `resources/` directory contains reference materials:
-
-- `documents/` - Methodology guides, tutorials
-- `prompts/` - System prompt examples, coding prompts
-  - `system_prompts/CLAUDE.md/` - 10 CLAUDE.md variants
 
 ## License
 
