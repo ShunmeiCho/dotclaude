@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "enabledPlugins": {
     "perplexity@perplexity-mcp-server": false,
     "claude-mem@thedotmack": true,
@@ -6,5 +7,18 @@
     "example-skills@anthropic-agent-skills": true,
     "superpowers@superpowers-marketplace": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Read(*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(**/*credentials*)",
+      "Read(**/*secret*)"
+    ]
+  }
 }
